@@ -6,14 +6,22 @@ import Community from './components/Community';
 import Resources from './components/Resources';
 import AnalysisForm from './components/AnalysisForm';
 import Footer from './components/Footer';
-import { initialize } from 'react-native-gtag';
 
 
 
 function App() {
-  // Inicialização do GA quando o app carrega
+  // Importa o script gtag.js quando o componente monta
   React.useEffect(() => {
-    initialize('G-7H84JBR36Y');
+    const script = document.createElement('script');
+    script.src = '/gtag.js';
+    script.async = true;
+    
+    document.head.appendChild(script);
+
+    // Remove o script quando o componente desmonta
+    return () => {
+      document.head.removeChild(script);
+    };
   }, []);
 
   return (
